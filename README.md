@@ -23,7 +23,7 @@
 ## Sample YAML
 
 ``` conf-vbox-guestvm.yml 
-# Define the set value of guestvm in YaML format.
+# Define the set value of guestvm in YAML format.
 # You can either create a yml file in the current directory, Or "str" described variable.
 # (*):The fields are required.
 #---
