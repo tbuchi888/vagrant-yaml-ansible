@@ -1,0 +1,41 @@
+# Define the set value of guestvm in YaML format.
+# You can either create a yml file in the current directory, Or "str" described variable.
+# (*):The fields are required.
+#---
+#guestvm:
+#  - name:                    * Set the guest VM's name . It is use hostname and Vagrant nodename
+#    box:                     * Set the guest VM's box name'.
+#    box_url:                   Set the guest VM's box url or path.
+#    ipaddress:                 Set the guest VM's ipaddress. If not set ignore template's used.
+#    os_type:                 * Set the guest VM's OS of the guest VM in 'windows' or 'linux'.
+#    os_username:               Set the guest VM's OS username for ssh or WinRM. If not set ignore.
+#    os_password:               Set the guest VM's OS password for ssh or WinRM. If not set ignore.
+#    ansible_playbook:          Set the playbook name of Ansible to use for the guest VM's provisioning. If not set ignore.
+#    ansible_inventory_path:    Set the inventory file path of Ansible to use for guest VM's provisioning. If not set ignore.
+#
+#
+---
+win_base: &WIN_BASE
+  box:                       win-2012r2-standard-amd64-nocm-mod
+  os_type:                   windows
+  os_username:               vagrant
+  os_password:               vagrant
+
+centos_base: &CENT_BASE
+  box:                       geerlingguy/centos6
+  os_type:                   linux
+
+guestvm:
+  - name:                    win2012-iis01
+    ipaddress:               192.168.33.51
+    ansible_playbook:        win2012_feature_iis_install.yml
+    ansible_inventory_path:  hosts
+    << : *WIN_BASE
+  - name:                    centos6-httpd01
+    ipaddress:               192.168.33.41
+    ansible_playbook:        centos6_httpd_install_noproxy.yml
+    << : *CENT_BASE
+  - name:                    centos6-httpd02
+    ipaddress:               192.168.33.42
+    ansible_playbook:        centos6_httpd_install_noproxy.yml
+    << : *CENT_BASE

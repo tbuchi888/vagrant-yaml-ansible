@@ -1,0 +1,2 @@
+<win>
+win2012-iis01 ansible_user=administrator ansible_password=vagrant ansible_host=192.168.33.51 ansible_port=5985 ansible_connection=winrm

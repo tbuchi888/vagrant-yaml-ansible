@@ -1,0 +1,31 @@
+---
+# Please use the OS of centOS6 and RHEL6. Also, please use in an environment that does not care about the HTTP_PROXY.
+
+# Setting the destination inventory host
+- hosts: all
+  become: yes
+  become_method: sudo
+  become_user: root
+  
+# Don't gather hosts facts for performance
+  gather_facts: no
+
+# Setting the task
+  tasks:
+#    - name: "{{inventory_hostname}}: yum update should have been updated(latest)"
+#      yum: name=* state=latest
+
+    - name: "{{inventory_hostname}}: libselinux-python should have been installed"
+      yum: name=libselinux-python state=installed 
+
+    - name: "{{inventory_hostname}}: httpd should have been installed"
+      yum: name=httpd state=installed 
+
+    - name: "{{inventory_hostname}}: copy html file"
+      copy: src=y.html dest=/var/www/html/index.html owner=apache group=apache mode=644 backup=yes
+
+    - name: "{{inventory_hostname}}: httpd should have been running"
+      service: name=httpd state=reloaded enabled=yes 
+      
+    - name: "{{inventory_hostname}}: lokkit -p 80:tcp"
+      command: lokkit -p 80:tcp

@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+    - name: "{{inventory_hostname}}: copy html file"
+      win_copy:
+        src: y.html
+        dest: C:\inetpub\wwwroot\index.html
+    - name: "{{inventory_hostname}}: shuld be Installed IIS"
+      win_feature:
+        name: "Web-Server"
+        state: present
