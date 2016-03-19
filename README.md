@@ -7,11 +7,12 @@
  - You can use Ansible provisioner of Vagrant.
 
 ## Verification Environment
- - Mac OSX yosemite
- - VirtualBox 5.0.16
- - Vagrant 1.8.1
- - ansible 2.1.0
- - ruby 2.0.0p481
+ - Host
+   - Mac OSX yosemite
+   - VirtualBox 5.0.16
+   - Vagrant 1.8.1
+   - Ansible 2.1.0
+   - ruby 2.0.0p481
  - GuestVM
    - CentOS 6
    - WinowsServer2012R2 
